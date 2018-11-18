@@ -23,7 +23,12 @@ pip install -r requirements.txt
 python3 download/train.py
 ```
 #### Test
-:exclamation: _File is very big (> 6GB)_
+:exclamation: _Dateset is very big (> 6GB)_
 ```bash
 python3 download/test.py
+```
+
+### Run Jupyter notebook _(project)_
+```bash
+jupyter notebook ml_project.ipynb 
 ```
