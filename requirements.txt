@@ -1,0 +1,6 @@
+kaggle
+zipfile
+jsonfile
+pandas
+seaborn
+matplotlib
