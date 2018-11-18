@@ -5,8 +5,10 @@ Tsinghua University - Machine learning final project
 
 Notebook for the project content __only__ visualisation, results or run external script
 
-- _th-ml-project_: Notebook for project
-- _pre_process_: Script for pre-processing
+- _ml_project_: Notebook for project
+- _download_: Script for download data _(no call in notebook)_
+- _load_: Script for load data _(call in notebook)_
+
 - - - -
 ## Usage
 
