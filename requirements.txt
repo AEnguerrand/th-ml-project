@@ -3,3 +3,4 @@ jsonfile
 pandas
 seaborn
 matplotlib
+jupyter
