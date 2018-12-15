@@ -4,9 +4,9 @@ from preprocess import regularts
 from pickles import pickling
 from datetime import datetime
 
-TRAIN_CSV_PATH = '../dataset/training_set.csv'
-TRAIN_TS_PATH = '../' + pickling.TRAIN_PROCESSED_DF_FILE
-TRAIN_TF_PATH = '../' + pickling.TRAIN_PROCESSED_TF_FILE
+TRAIN_CSV_PATH = 'dataset/training_set.csv'
+TRAIN_TS_PATH = pickling.TRAIN_PROCESSED_DF_FILE
+TRAIN_TF_PATH = pickling.TRAIN_PROCESSED_TF_FILE
 
 
 def process_train(filename=TRAIN_CSV_PATH):

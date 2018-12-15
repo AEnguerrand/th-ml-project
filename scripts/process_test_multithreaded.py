@@ -5,10 +5,10 @@ from preprocess import regularts
 from pickles import pickling
 from datetime import datetime
 
-TEST_CSV_PATH = '../dataset/test_set.csv'
-CHUNK_DF_PATH_PREFIX = '../' + pickling.CHUNK_DF_FILE_PREFIX
-CHUNK_TS_DF_PATH_PREFIX = '../' + pickling.CHUNK_TS_DF_FILE_PREFIX
-CHUNK_TF_PATH_PREFIX = '../' + pickling.CHUNK_TF_FILE_PREFIX
+TEST_CSV_PATH = 'dataset/test_set.csv'
+CHUNK_DF_PATH_PREFIX = pickling.CHUNK_DF_FILE_PREFIX
+CHUNK_TS_DF_PATH_PREFIX = pickling.CHUNK_TS_DF_FILE_PREFIX
+CHUNK_TF_PATH_PREFIX = pickling.CHUNK_TF_FILE_PREFIX
 
 
 def process_test_csv_to_pickles():
