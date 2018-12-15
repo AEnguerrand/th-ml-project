@@ -28,7 +28,7 @@ def unpickle_processed_train_tf(filename=TRAIN_PROCESSED_TF_FILE):
 
 
 def generate_chunk_file_name(chunk_id, file_prefix):
-    return file_prefix + f'{chunk_id}.p'
+    return file_prefix + '{}.p'.format(chunk_id)
 
 
 def pickle_chunk_dataframe(dataframe, chunk_id, filename=None):
