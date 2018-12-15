@@ -1,6 +1,7 @@
 import zipfile
 import os
 
+
 def download_train():
     # SCRIPT NOT WORK ON WINDOWS
     # @todo path windows
@@ -14,6 +15,7 @@ def download_train():
           zip_ref.extractall("../dataset")
           zip_ref.close()
     print("File is unzip to csv. OK.")
+
 
 if __name__ == '__main__':
     download_train()
