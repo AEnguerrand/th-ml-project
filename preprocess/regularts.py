@@ -17,7 +17,7 @@ def get_weights(kernel_centers, times, tau=5):
 
 
 def weighted_average_on_chunk(chunk, number_points=None):
-    sample_weights = chunk[[f'sw_{i}' for i in range(number_points)]]
+    sample_weights = chunk[['sw_{}'.format(i) for i in range(number_points)]]
     sample_weights /= np.sum(sample_weights, axis=0)
     weighted_flux = np.expand_dims(chunk['flux'].values, 1) * sample_weights.fillna(0)
     return np.sum(weighted_flux, axis=0)
@@ -28,7 +28,7 @@ def regularize_dataframe_custom(df, kernel_width=5, kernel_period=20):
     kernel_centers = np.array(np.arange(t_min, t_max, kernel_period))
     weights = get_weights(kernel_centers, df.mjd.values, kernel_width)
     for i in range(len(kernel_centers)):
-        df[f'sw_{i}'] = weights[:, i]
+        df['sw_{}'.format(i)] = weights[:, i]
     return df.groupby([OBJECT_ID, PASSBAND]).apply(weighted_average_on_chunk, number_points=len(kernel_centers))
 
 
