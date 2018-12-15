@@ -4,6 +4,7 @@ from load import test
 from preprocess import regularts
 from pickles import pickling
 from datetime import datetime
+import sys
 
 TEST_CSV_PATH = 'dataset/test_set.csv'
 CHUNK_DF_PATH_PREFIX = pickling.CHUNK_DF_FILE_PREFIX
@@ -28,7 +29,10 @@ def process_test_csv_to_pickles():
 
 def process_test_multithreaded():
     start_time = datetime.now()
-    process_test_csv_to_pickles()
+    if len(sys.argv) >= 3 and sys.argv[1] == 'notesttrans':
+        print("NO TEST TRANSFORM")
+    else:
+        process_test_csv_to_pickles()
     test.load_apply(number_chunks=91, load_prefix=CHUNK_DF_PATH_PREFIX,
                                        save_prefix=CHUNK_TS_DF_PATH_PREFIX, function=regularts.regularize_dataframe)
     test.load_apply(number_chunks=91, load_prefix=CHUNK_TS_DF_PATH_PREFIX,
