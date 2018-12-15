@@ -9,7 +9,7 @@ TRAIN_TS_PATH = '../' + pickling.TRAIN_PROCESSED_DF_FILE
 TRAIN_TF_PATH = '../' + pickling.TRAIN_PROCESSED_TF_FILE
 
 
-def load_train_process(filename=TRAIN_CSV_PATH):
+def process_train(filename=TRAIN_CSV_PATH):
     print(f'Loading csv at {filename}')
     training_set = pd.read_csv(filename)
     print('Regularizing train TS')
@@ -23,4 +23,4 @@ def load_train_process(filename=TRAIN_CSV_PATH):
 
 
 if __name__ == "__main__":
-    load_train_process()
+    process_train()
