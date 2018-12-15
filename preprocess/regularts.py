@@ -43,7 +43,7 @@ def gen_sample_times(sample_interval=20):
 def weighted_average(df, kernel_centers):
     weights = get_weights(kernel_centers, df[MJD].values)
     ret = pd.Series(np.dot(df[FLUX].values, weights) / np.dot(np.ones(df[FLUX].values.shape), weights), name="n_flux")
-    ret.fillna(0)
+    ret = ret.fillna(0)
     ret.index.name = "T"
     return ret
 
