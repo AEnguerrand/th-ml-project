@@ -31,43 +31,57 @@ def generate_chunk_file_name(chunk_id, file_prefix):
     return file_prefix + f'{chunk_id}.p'
 
 
-def pickle_chunk_dataframe(dataframe, object_id, filename=None):
+def pickle_chunk_dataframe(dataframe, chunk_id, filename=None):
     if not filename:
-        filename = generate_chunk_file_name(object_id, CHUNK_DF_FILE_PREFIX)
+        filename = generate_chunk_file_name(chunk_id, CHUNK_DF_FILE_PREFIX)
     with open(filename, 'wb') as outfile:
         pickle.dump(dataframe, outfile)
 
 
-def unpickle_chunk_dataframe(object_id, filename=None):
+def unpickle_chunk_dataframe(chunk_id, filename=None):
     if not filename:
-        filename = generate_chunk_file_name(object_id, CHUNK_DF_FILE_PREFIX)
+        filename = generate_chunk_file_name(chunk_id, CHUNK_DF_FILE_PREFIX)
     with open(filename, 'rb') as infile:
         return pickle.load(infile)
 
 
-def pickle_chunk_processed_ts(ts_dataframe, object_id, filename=None):
+def pickle_chunk_processed_ts(ts_dataframe, chunk_id, filename=None):
     if not filename:
-        filename = generate_chunk_file_name(object_id, CHUNK_TS_DF_FILE_PREFIX)
+        filename = generate_chunk_file_name(chunk_id, CHUNK_TS_DF_FILE_PREFIX)
     with open(filename, 'wb') as outfile:
         pickle.dump(ts_dataframe, outfile)
 
 
-def unpickle_chunk_processed_ts(object_id, filename=None):
+def unpickle_chunk_processed_ts(chunk_id, filename=None):
     if not filename:
-        filename = generate_chunk_file_name(object_id, CHUNK_TS_DF_FILE_PREFIX)
+        filename = generate_chunk_file_name(chunk_id, CHUNK_TS_DF_FILE_PREFIX)
     with open(filename, 'rb') as infile:
         return pickle.load(infile)
 
 
-def pickle_chunk_processed_tf(ts_tensor, object_id, filename=None):
+def pickle_chunk_processed_tf(ts_tensor, chunk_id, filename=None):
     if not filename:
-        filename = generate_chunk_file_name(object_id, CHUNK_TF_FILE_PREFIX)
+        filename = generate_chunk_file_name(chunk_id, CHUNK_TF_FILE_PREFIX)
     with open(filename, 'wb') as outfile:
         pickle.dump(ts_tensor, outfile)
 
 
-def unpickle_chunk_processed_tf(object_id, filename=None):
+def unpickle_chunk_processed_tf(chunk_id, filename=None):
     if not filename:
-        filename = generate_chunk_file_name(object_id, CHUNK_TF_FILE_PREFIX)
+        filename = generate_chunk_file_name(chunk_id, CHUNK_TF_FILE_PREFIX)
     with open(filename, 'rb') as infile:
         return pickle.load(infile)
+
+
+def pickle_chunk(chunk,chunk_id,prefix):
+    filename = generate_chunk_file_name(chunk_id, prefix)
+    with open(filename, 'wb') as outfile:
+        pickle.dump(chunk, outfile)
+
+
+def unpickle_chunk(chunk_id,prefix):
+    filename = generate_chunk_file_name(chunk_id,prefix)
+    with open(filename, 'rb') as infile:
+        return pickle.load(infile)
+
+
