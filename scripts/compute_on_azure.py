@@ -5,6 +5,8 @@ import sys
 
 def compute_on_azure():
     if len(sys.argv) >= 2 and sys.argv[1] == 'nodownload':
+        print("[COMPUTE] [NO Download]")
+    else:
         print("[COMPUTE] [Download train dataset]")
         dl_train.download_train()
         print("[COMPUTE] [Download test dataset]")
