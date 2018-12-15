@@ -18,7 +18,7 @@ def load_apply(number_chunks, load_prefix, function, *args, **kwargs):
 
 """Multithread load chunks (Functions for worker) (apply and save)"""
 def load_apply_save_worker_func(chunk_id, load_prefix, save_prefix, function, *args, **kwargs):
-    print(f"processing chunk:", chunk_id)
+    print("processing chunk:", chunk_id)
     chunk = pickling.unpickle_chunk(chunk_id=chunk_id, prefix=load_prefix)
     ret_chunk = function(chunk, *args, **kwargs)
     pickling.pickle_chunk(chunk=ret_chunk, chunk_id=chunk_id, prefix=save_prefix)
