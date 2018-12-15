@@ -33,10 +33,10 @@ def process_test_multithreaded():
         print("NO TEST TRANSFORM")
     else:
         process_test_csv_to_pickles()
-    #save_prefix=CHUNK_TS_DF_PATH_PREFIX,
-    test.load_apply(number_chunks=91, load_prefix=CHUNK_DF_PATH_PREFIX,function=regularts.regularize_dataframe)
-    #save_prefix=CHUNK_TF_PATH_PREFIX,
-    test.load_apply(number_chunks=91, load_prefix=CHUNK_TS_DF_PATH_PREFIX,function=regularts.tensorize_regular_ts)
+    test.load_apply_save(number_chunks=91, load_prefix=CHUNK_DF_PATH_PREFIX,
+                                       save_prefix=CHUNK_TS_DF_PATH_PREFIX, function=regularts.regularize_dataframe)
+    test.load_apply_save(number_chunks=91, load_prefix=CHUNK_TS_DF_PATH_PREFIX,
+                                       save_prefix=CHUNK_TF_PATH_PREFIX, function=regularts.tensorize_regular_ts)
     time_elapsed = datetime.now() - start_time
     print('[Process Test Dataset] Time elapsed (hh:mm:ss.ms) {}'.format(time_elapsed))
 

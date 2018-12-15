@@ -5,15 +5,19 @@ from utils import thread_pool
 """Monothread load chunks (apply and save)"""
 def load_apply_save(number_chunks, load_prefix, save_prefix, function, *args, **kwargs):
     for chunk_id in range(number_chunks):
+        print("processing chunk:", chunk_id)
         chunk = pickling.unpickle_chunk(chunk_id=chunk_id, prefix=load_prefix)
         ret_chunk = function(chunk, *args, **kwargs)
         pickling.pickle_chunk(chunk=ret_chunk, chunk_id=chunk_id, prefix=save_prefix)
+        print("finish for:", chunk_id)
 
 """Monothread load chunk (apply only)"""
 def load_apply(number_chunks, load_prefix, function, *args, **kwargs):
     for chunk_id in range(number_chunks):
+        print("processing chunk:", chunk_id)
         chunk = pickling.unpickle_chunk(chunk_id=chunk_id, prefix=load_prefix)
         function(chunk, *args, **kwargs)
+        print("finish for:", chunk_id)
 
 
 """Multithread load chunks (Functions for worker) (apply and save)"""
