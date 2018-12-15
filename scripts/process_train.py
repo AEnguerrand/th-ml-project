@@ -11,7 +11,7 @@ TRAIN_TF_PATH = '../' + pickling.TRAIN_PROCESSED_TF_FILE
 
 def process_train(filename=TRAIN_CSV_PATH):
     start_time = datetime.now()
-    print(f'Loading csv at {filename}')
+    print("Loading csv at", filename)
     training_set = pd.read_csv(filename)
     print('Regularizing train TS')
     ts = regularts.regularize_dataframe(training_set)
@@ -19,7 +19,7 @@ def process_train(filename=TRAIN_CSV_PATH):
     pickling.pickle_processed_train(ts,filename=TRAIN_TS_PATH)
     print('Tensorizing time series')
     tf = regularts.tensorize_regular_ts(ts)
-    print(f'Pickling tensorized time series at {TRAIN_TF_PATH}')
+    print('Pickling tensorized time series at', TRAIN_TF_PATH)
     pickling.pickle_processed_train(tf, filename=TRAIN_TF_PATH)
     print('[Process Train Dataset] Time elapsed (hh:mm:ss.ms) {}'.format(time_elapsed))
 
