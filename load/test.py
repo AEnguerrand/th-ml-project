@@ -2,18 +2,17 @@ import pandas as pd
 from pickles import pickling
 from utils import thread_pool
 
-NUMBER_THREADS = 4
-
-
 def load_apply_save_worker_func(chunk_id, load_prefix, save_prefix, function, *args, **kwargs):
     print(f"processing chunk {chunk_id}")
     chunk = pickling.unpickle_chunk(chunk_id=chunk_id, prefix=load_prefix)
+    print("Chunk ID", chunk_id)
     ret_chunk = function(chunk, *args, **kwargs)
+    print("function call", chunk_id)
     pickling.pickle_chunk(chunk=ret_chunk, chunk_id=chunk_id, prefix=save_prefix)
-
+    print("finish", chunk_id)
 
 def load_apply_save(number_chunks, load_prefix, save_prefix, function, *args, **kwargs):
-    pool = thread_pool.ThreadPool(4)
+    pool = thread_pool.ThreadPool(62)
     for chunk_id in range(number_chunks):
         pool.add_task(load_apply_save_worker_func, chunk_id, load_prefix, save_prefix, function, *args, **kwargs)
     pool.wait_completion()
