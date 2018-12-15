@@ -29,7 +29,7 @@ def process_test_csv_to_pickles():
 
 def process_test_multithreaded():
     start_time = datetime.now()
-    if len(sys.argv) >= 3 and sys.argv[1] == 'notesttrans':
+    if len(sys.argv) >= 3 and sys.argv[2] == 'notesttrans':
         print("NO TEST TRANSFORM")
     else:
         process_test_csv_to_pickles()
