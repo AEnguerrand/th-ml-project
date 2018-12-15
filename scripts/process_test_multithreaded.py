@@ -29,9 +29,9 @@ def process_test_csv_to_pickles():
 def process_test_multithreaded():
     start_time = datetime.now()
     process_test_csv_to_pickles()
-    test.load_apply_save_multithreaded(number_chunks=91, load_prefix=CHUNK_DF_PATH_PREFIX,
+    test.load_apply(number_chunks=91, load_prefix=CHUNK_DF_PATH_PREFIX,
                                        save_prefix=CHUNK_TS_DF_PATH_PREFIX, function=regularts.regularize_dataframe)
-    test.load_apply_save_multithreaded(number_chunks=91, load_prefix=CHUNK_TS_DF_PATH_PREFIX,
+    test.load_apply(number_chunks=91, load_prefix=CHUNK_TS_DF_PATH_PREFIX,
                                        save_prefix=CHUNK_TF_PATH_PREFIX, function=regularts.tensorize_regular_ts)
     time_elapsed = datetime.now() - start_time
     print('[Process Test Dataset] Time elapsed (hh:mm:ss.ms) {}'.format(time_elapsed))
