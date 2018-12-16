@@ -6,7 +6,8 @@ Tsinghua University - Machine learning final project
 
 ## Architecture
 
-Notebook for the project content __only__ visualisation, results or run external script
+Notebook for the project content __only__ visualisation, results or run external script.
+Project is run by a python script.
 
 - _ml_project_: Notebook for project
 - _dataset_: Directory where dataset is store (test and train)

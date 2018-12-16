@@ -4,7 +4,7 @@ from scripts import process_test, process_train
 import sys
 
 
-def compute_on_azure():
+def compute_on_vm():
     if len(sys.argv) >= 2 and sys.argv[1] == 'nodownload':
         print("[COMPUTE] [NO Download]")
     else:
@@ -31,4 +31,4 @@ def compute_on_azure():
 
 
 if __name__ == '__main__':
-    compute_on_azure()
+    compute_on_vm()
