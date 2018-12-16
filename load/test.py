@@ -53,3 +53,8 @@ def get_chunk_metadata_with_chunk_ts_df(chunk):
     return res
 
 
+"""Get object_id in the chunk"""
+def get_chunk_object_id_with_chunk_ts_df(chunk):
+    res = chunk.index.get_level_values('object_id').values
+    return res
+
