@@ -1,4 +1,8 @@
 steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: 3.5
+      architecture: 'x64'
   - script:  pip install -r requirements.txt
     displayName: 'Install tools'
   - script: python scripts/compute_on_vm.py
