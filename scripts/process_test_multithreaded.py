@@ -6,33 +6,13 @@ from pickles import pickling
 from datetime import datetime
 import sys
 
-TEST_CSV_PATH = 'dataset/test_set.csv'
 CHUNK_DF_PATH_PREFIX = pickling.CHUNK_DF_FILE_PREFIX
 CHUNK_TS_DF_PATH_PREFIX = pickling.CHUNK_TS_DF_FILE_PREFIX
 CHUNK_TF_PATH_PREFIX = pickling.CHUNK_TF_FILE_PREFIX
 
 
-def process_test_csv_to_pickles():
-    chunks = 5000000  # 91 iterations require
-    for it_chunk, df_chunk in enumerate(pd.read_csv(TEST_CSV_PATH, chunksize=chunks, iterator=True)):
-        print("===================")
-        print('iteration:', it_chunk)
-        if it_chunk >= 1:
-            df_chunk = pd.concat([df_chunk_cache, df_chunk])
-        object_id_last = df_chunk.tail(1)['object_id'].values[0]
-        # remove last object_id if is not the end
-        if it_chunk != 90:
-            df_chunk_cache = df_chunk[df_chunk['object_id'] == object_id_last]
-            df_chunk = df_chunk[df_chunk['object_id'] != object_id_last]
-        pickling.pickle_chunk_dataframe(df_chunk, it_chunk)
-
-
 def process_test_multithreaded():
     start_time = datetime.now()
-    if len(sys.argv) >= 3 and sys.argv[2] == 'notesttrans':
-        print("NO TEST TRANSFORM")
-    else:
-        process_test_csv_to_pickles()
     test.load_apply_save(number_chunks=91, load_prefix=CHUNK_DF_PATH_PREFIX,
                                        save_prefix=CHUNK_TS_DF_PATH_PREFIX, function=regularts.regularize_dataframe)
     test.load_apply_save(number_chunks=91, load_prefix=CHUNK_TS_DF_PATH_PREFIX,

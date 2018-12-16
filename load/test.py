@@ -1,6 +1,7 @@
 import pandas as pd
 from pickles import pickling
 from utils import thread_pool
+from tqdm import tqdm
 
 test_set_metadata = False
 
@@ -43,6 +44,22 @@ def load_metadata():
     print("[LOAD] Load metadata for test dataset")
     test_set_metadata = pd.read_csv('dataset/test_set_metadata.csv')
 
+
+def convert_test_set_to_chunk():
+    chunks = 5000000  # 91 iterations require
+    pbar = tqdm(total=91)
+    for it_chunk, df_chunk in enumerate(pd.read_csv('dataset/test_set.csv', chunksize=chunks, iterator=True)):
+        pbar.set_description("Processing chunk: %s" % it_chunk)
+        if it_chunk >= 1:
+            df_chunk = pd.concat([df_chunk_cache, df_chunk])
+        object_id_last = df_chunk.tail(1)['object_id'].values[0]
+        # remove last object_id if is not the end
+        if it_chunk != 90:
+            df_chunk_cache = df_chunk[df_chunk['object_id'] == object_id_last]
+            df_chunk = df_chunk[df_chunk['object_id'] != object_id_last]
+        pickling.pickle_chunk_dataframe(df_chunk, it_chunk)
+        pbar.update(1)
+    pbar.close()
 
 """Get chunk metadata on tes"""
 def get_chunk_metadata_with_chunk_ts_df(chunk):
