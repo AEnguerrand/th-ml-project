@@ -2,6 +2,8 @@ import pandas as pd
 from pickles import pickling
 from utils import thread_pool
 
+test_set_metadata = False
+
 """Monothread load chunks (apply and save)"""
 def load_apply_save(number_chunks, load_prefix, save_prefix, function, *args, **kwargs):
     for chunk_id in range(number_chunks):
@@ -34,3 +36,20 @@ def load_apply_save_multithreaded(number_chunks, load_prefix, save_prefix, funct
     for chunk_id in range(number_chunks):
         pool.add_task(load_apply_save_worker_func, chunk_id, load_prefix, save_prefix, function, *args, **kwargs)
     pool.wait_completion()
+
+
+def load_metadata():
+    global test_set_metadata
+    print("[LOAD] Load metadata for test dataset")
+    test_set_metadata = pd.read_csv('dataset/test_set_metadata.csv')
+
+
+"""Get chunk metadata on tes"""
+def get_chunk_metadata_with_chunk_ts_df(chunk):
+    object_id_min = chunk.index.levels[0].min()
+    object_id_max = chunk.index.levels[0].max()
+    res = test_set_metadata.loc[(test_set_metadata['object_id'] >= object_id_min) &
+                                (test_set_metadata['object_id'] <= object_id_max)]
+    return res
+
+
