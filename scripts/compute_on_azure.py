@@ -1,6 +1,6 @@
 from download import test as dl_test, train as dl_train
 from load import test as l_test, train as l_train
-from scripts import process_test_multithreaded, process_train
+from scripts import process_test, process_train
 import sys
 
 
@@ -26,7 +26,7 @@ def compute_on_azure():
     print("[COMPUTE] [Process train dataset]")
     process_train.process_train()
     print("[COMPUTE] [Process test dataset]")
-    process_test_multithreaded.process_test_multithreaded()
+    process_test.process_test_monothread()
     print("[COMPUTE] [Finish]")
 
 

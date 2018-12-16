@@ -11,7 +11,7 @@ CHUNK_TS_DF_PATH_PREFIX = pickling.CHUNK_TS_DF_FILE_PREFIX
 CHUNK_TF_PATH_PREFIX = pickling.CHUNK_TF_FILE_PREFIX
 
 
-def process_test_multithreaded():
+def process_test_monothread():
     start_time = datetime.now()
     test.load_apply_save(number_chunks=91, load_prefix=CHUNK_DF_PATH_PREFIX,
                                        save_prefix=CHUNK_TS_DF_PATH_PREFIX, function=regularts.regularize_dataframe)
@@ -22,4 +22,4 @@ def process_test_multithreaded():
 
 
 if __name__ == '__main__':
-    process_test_multithreaded()
+    process_test_monothread()
