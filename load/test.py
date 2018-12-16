@@ -2,6 +2,7 @@ import pandas as pd
 from pickles import pickling
 from utils import thread_pool
 from tqdm import tqdm
+from multiprocessing import Pool
 
 test_set_metadata = False
 
@@ -36,11 +37,11 @@ def load_apply_save_worker_func(chunk_id, load_prefix, save_prefix, function, *a
 
 """Multithread load chunks (loop) (apply and save)"""
 def load_apply_save_multithreaded(number_chunks, load_prefix, save_prefix, function, *args, **kwargs):
-    pool = thread_pool.ThreadPool(62)
+    th_pool = Pool()
     for chunk_id in range(number_chunks):
-        pool.add_task(load_apply_save_worker_func, chunk_id, load_prefix, save_prefix, function, *args, **kwargs)
-    pool.wait_completion()
-
+        th_pool.apply_async(load_apply_save_worker_func, (chunk_id, load_prefix, save_prefix, function,) + args, kwargs)
+    th_pool.close()
+    th_pool.join()
 
 def load_metadata():
     global test_set_metadata
