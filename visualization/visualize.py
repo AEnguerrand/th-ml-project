@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def visualize_single_object(mjd, flux, passbands):
@@ -9,3 +10,11 @@ def visualize_single_object(mjd, flux, passbands):
                marker='.',
                c=passbands)
     plt.show()
+
+    
+def visualize_tensor(tensor_object):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    for i in range(6):
+        ax.scatter(np.arange(tensor_object.shape[0]),tensor_object[:,i],marker='.')
+    fig.show()
