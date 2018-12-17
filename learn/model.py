@@ -7,12 +7,11 @@ from pickles import pickling
 from numpy import random
 from load import train
 
-optimizer = None
-
 ts_shape = (56, 6)
 output_size = 15
 
-def build_net1(inputs,output_size=output_size):
+
+def build_net1(inputs, output_size=output_size):
     convolved1 = tf.layers.conv1d(
         inputs=inputs,
         filters=20,
@@ -78,5 +77,51 @@ def build_net1(inputs,output_size=output_size):
     )
 
     return predict_logits
+
+
+def predict(inputs):
+    return tf.sigmoid(build_net1(inputs), name="predict")
+
+
+# def loss_function(ground_truth_labels, logits_predictions):
+#     loss = tf.losses.sigmoid_cross_entropy(
+#         multi_class_labels=ground_truth_labels,
+#         logits=logits_predictions)
+#     return loss
+#
+#
+# def train_model(learning_rate=0.001):
+#     # with tf.name_scope('Optimizer'):
+#     global optimizer
+#     if not optimizer:
+#         optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+#
+#     # with tf.name_scope('Train'):
+#     return optimizer.minimize(loss_function)
+
+def build_graph():
+    graph = tf.Graph()
+    ts_shape = (56, 6)
+    output_size = 15
+
+    x_ts = tf.placeholder(tf.float32, [None, ts_shape[0], ts_shape[1]], name="x_ts_placeholder")
+    y = tf.placeholder(tf.float32, [None, output_size], name="y_placeholder")
+
+    logits_prediction = build_net1(inputs=x_ts)
+
+    # OPTIMIZATION PART
+
+    learning_rate = 0.001
+    loss = tf.losses.sigmoid_cross_entropy(
+    multi_class_labels=y,
+    logits=logits_prediction)
+# ,
+#     weights=tf.constant(
+#         [[ 151,  495,  924, 1193,  183,   30,  484,  102,  981,  208,  370,2313,  239,  175,0]])
+# )
+    optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate)
+    train = optimizer.minimize(loss,name="train")
+    return graph
+
 
 
