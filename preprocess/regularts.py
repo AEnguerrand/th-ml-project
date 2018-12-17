@@ -59,3 +59,10 @@ def tensorize_regular_ts(regular_ts):
     number_passbands = 6
     mat = regular_ts.values.reshape([number_objects, number_passbands, -1])
     return mat.swapaxes(1, 2)
+
+
+def standardize_regularts(tensorized_ts):
+    means = tensorized_ts.mean(axis=(1, 2)).reshape((tensorized_ts.shape[0], 1, 1))
+    stds = tensorized_ts.std(axis=(1, 2)).reshape((tensorized_ts.shape[0], 1, 1))
+    standardized_ts = (tensorized_ts - means) / stds
+    return standardized_ts
