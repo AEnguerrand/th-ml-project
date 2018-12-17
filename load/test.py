@@ -4,7 +4,7 @@ from utils import thread_pool
 from tqdm import tqdm
 from multiprocessing import Pool
 
-test_set_metadata = False
+test_set_metadata = None
 
 """Monothread load chunks (apply and save)"""
 def load_apply_save(number_chunks, load_prefix, save_prefix, function, *args, **kwargs):
@@ -43,10 +43,12 @@ def load_apply_save_multithreaded(number_chunks, load_prefix, save_prefix, funct
     th_pool.close()
     th_pool.join()
 
+
 def load_metadata():
     global test_set_metadata
     print("[LOAD] Load metadata for test dataset")
     test_set_metadata = pd.read_csv('dataset/test_set_metadata.csv')
+    return test_set_metadata
 
 
 def convert_test_set_to_chunk():
