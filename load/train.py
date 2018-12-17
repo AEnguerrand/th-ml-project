@@ -1,19 +1,14 @@
 import pandas as pd
-training_set = None
-training_set_metadata = None
+from utils import config
 
 
 def load_set():
-    global training_set
-    training_set = pd.read_csv('dataset/training_set.csv')
-    return training_set
+    config.training_set = pd.read_csv('dataset/training_set.csv')
 
 
 def load_metadata():
-    global training_set_metadata
     print("[LOAD] Load metadata for training dataset")
-    training_set_metadata = pd.read_csv('dataset/training_set_metadata.csv')
-    return training_set_metadata
+    config.training_set_metadata = pd.read_csv('dataset/training_set_metadata.csv')
 
 
 if __name__ == '__main__':

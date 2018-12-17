@@ -1,10 +1,8 @@
 import pandas as pd
 from pickles import pickling
-from utils import thread_pool
 from tqdm import tqdm
 from multiprocessing import Pool
-
-test_set_metadata = None
+from utils import config
 
 """Monothread load chunks (apply and save)"""
 def load_apply_save(number_chunks, load_prefix, save_prefix, function, *args, **kwargs):
@@ -45,11 +43,8 @@ def load_apply_save_multithreaded(number_chunks, load_prefix, save_prefix, funct
 
 
 def load_metadata():
-    global test_set_metadata
     print("[LOAD] Load metadata for test dataset")
-    test_set_metadata = pd.read_csv('dataset/test_set_metadata.csv')
-    return test_set_metadata
-
+    config.test_set_metadata = pd.read_csv('dataset/test_set_metadata.csv')
 
 def convert_test_set_to_chunk():
     chunks = 5000000  # 91 iterations require
@@ -71,8 +66,8 @@ def convert_test_set_to_chunk():
 def get_chunk_metadata_with_chunk_ts_df(chunk):
     object_id_min = chunk.index.levels[0].min()
     object_id_max = chunk.index.levels[0].max()
-    res = test_set_metadata.loc[(test_set_metadata['object_id'] >= object_id_min) &
-                                (test_set_metadata['object_id'] <= object_id_max)]
+    res = config.test_set_metadata.loc[(config.test_set_metadata['object_id'] >= object_id_min) &
+                                        (config.test_set_metadata['object_id'] <= object_id_max)]
     return res
 
 
